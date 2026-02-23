@@ -1,0 +1,32 @@
+{
+  "name": "comp3510sef-gp",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000C\u0000O\u0000M\u0000P\u00003\u00005\u00001\u00000\u0000S\u0000E\u0000F\u0000-\u0000G\u0000P\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jASON-6969/COMP3510SEF-GP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jASON-6969/COMP3510SEF-GP/issues"
+  },
+  "homepage": "https://github.com/jASON-6969/COMP3510SEF-GP#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.97.0",
+    "pinia": "^3.0.4",
+    "vue": "^3.5.28",
+    "vue-router": "^5.0.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.4",
+    "vite": "^7.3.1"
+  }
+}
