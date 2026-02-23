@@ -27,15 +27,20 @@ body {
   background: linear-gradient(90deg, var(--hkmublue), var(--hkmugreen));
   color: #fff;
   padding: 0.75rem 1.5rem;
+}
+
+.app-header-top {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .app-logo {
   height: 48px;
   width: auto;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 .app-title {
@@ -48,6 +53,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  margin-left: auto;
 }
 
 .nav-bar a {
@@ -64,9 +70,70 @@ body {
   border-color: rgba(255, 255, 255, 0.4);
 }
 
+.nav-user {
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+
+.nav-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
 .nav-login {
   margin-left: auto;
   background-color: #ffffff22;
+}
+
+.login-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.login-form input {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.form-error {
+  color: #c00;
+  margin: 0.5rem 0;
+}
+
+.btn-primary {
+  background: var(--hkmugreen);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #007a5c;
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 .app-main {
@@ -92,5 +159,157 @@ body {
 
 .home-view h2 {
   margin-top: 0;
+}
+
+.home-subtitle {
+  color: #555;
+  margin-top: 0.25rem;
+}
+
+.home-quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.quick-link {
+  background: var(--hkmugreen);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.quick-link:hover {
+  background: #007a5c;
+}
+
+.home-stats {
+  margin: 1.5rem 0;
+}
+
+.stats-intro {
+  margin-bottom: 0.75rem;
+}
+
+.stats-cards {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: var(--bg-light);
+  border: 1px solid #e0e4e8;
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  min-width: 120px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--hkmugreen);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.home-latest h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.item-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.item-card {
+  display: block;
+  background: #fff;
+  border: 1px solid #e0e4e8;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s;
+}
+
+.item-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.item-card-image {
+  aspect-ratio: 4/3;
+  background: #eee;
+  overflow: hidden;
+}
+
+.item-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-card-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.item-card-body {
+  padding: 0.75rem;
+}
+
+.item-card-title {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+}
+
+.item-card-meta {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.item-card-status {
+  display: inline-block;
+  margin-top: 0.25rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.item-card-status.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.item-card-status.status-in_progress {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.item-card-status.status-returned {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.loading,
+.empty {
+  color: #666;
+  padding: 1rem 0;
 }
 
