@@ -4,9 +4,18 @@
     <p class="home-subtitle">Helping students reunite with their belongings.</p>
 
     <div class="home-quick-links">
-      <router-link to="/report-lost" class="quick-link">Report Lost</router-link>
-      <router-link to="/report-found" class="quick-link">I Found Something</router-link>
-      <router-link to="/items" class="quick-link">Search Items</router-link>
+      <router-link to="/report-lost" class="quick-link quick-link-primary">
+        <span class="quick-link-title">Report Lost</span>
+        <span class="quick-link-desc">Create a report for an item you have lost.</span>
+      </router-link>
+      <router-link to="/report-found" class="quick-link quick-link-accent">
+        <span class="quick-link-title">I Found Something</span>
+        <span class="quick-link-desc">Submit details of an item you have found.</span>
+      </router-link>
+      <router-link to="/items" class="quick-link quick-link-outline">
+        <span class="quick-link-title">Search Items</span>
+        <span class="quick-link-desc">Browse and search all lost &amp; found items.</span>
+      </router-link>
     </div>
 
     <div class="home-stats">

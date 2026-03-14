@@ -5,7 +5,12 @@
       <div v-else class="item-card-placeholder">No photo</div>
     </div>
     <div class="item-card-body">
-      <h3 class="item-card-title">{{ item.title }}</h3>
+      <div class="item-card-header">
+        <span class="item-card-type" :class="'type-' + (item.type || 'unknown')">
+          {{ typeLabel }}
+        </span>
+        <h3 class="item-card-title">{{ item.title }}</h3>
+      </div>
       <p class="item-card-meta">{{ item.location }} · {{ formattedTime }}</p>
       <span class="item-card-status" :class="'status-' + item.status">{{ statusLabel }}</span>
     </div>
@@ -33,5 +38,12 @@ const statusLabel = computed(() => {
   const s = props.item?.status || '';
   const map = { pending: 'Pending', in_progress: 'In progress', claimed: 'Claimed', returned: 'Returned', cancelled: 'Cancelled' };
   return map[s] || s;
+});
+
+const typeLabel = computed(() => {
+  const t = props.item?.type || '';
+  if (t === 'lost') return 'Lost';
+  if (t === 'found') return 'Found';
+  return t || 'Item';
 });
 </script>
