@@ -46,6 +46,17 @@
       </div>
 
       <div class="form-group">
+        <label for="contact">Contact information (optional)</label>
+        <input
+          id="contact"
+          v-model="form.contact"
+          type="text"
+          placeholder="e.g. 6123 4567 / your@email.com"
+        />
+        <small>If left empty, your profile contact will be used.</small>
+      </div>
+
+      <div class="form-group">
         <label for="photo">Photo (optional)</label>
         <input id="photo" type="file" accept="image/*" @change="onFileChange" />
       </div>
@@ -74,6 +85,7 @@ const form = reactive({
   storageLocation: '',
   time: '',
   description: '',
+  contact: '',
 });
 
 const file = ref(null);
@@ -147,7 +159,7 @@ async function handleSubmit() {
       time: timeValue,
       storage_location: form.storageLocation.trim() || null,
       status: 'pending',
-      finder_contact: buildContactText(),
+      finder_contact: form.contact.trim() || buildContactText() || null,
     };
 
     if (userId && !isDemoId(userId)) {
@@ -177,6 +189,7 @@ async function handleSubmit() {
     form.storageLocation = '';
     form.time = '';
     form.description = '';
+    form.contact = '';
     file.value = null;
   } catch (e) {
     console.error('Error reporting found item', e);
