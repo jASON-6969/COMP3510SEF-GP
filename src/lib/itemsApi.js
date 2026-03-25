@@ -100,6 +100,31 @@ export async function loadPhotosForItems(itemIds) {
   return byItem;
 }
 
+export async function fetchItemById(id) {
+  if (!id) return null;
+  const { data, error } = await supabase
+    .from(ITEMS_TABLE)
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    // Supabase returns an error when .single() finds no rows
+    if (error.code === 'PGRST116') return null;
+    console.error('Error fetching item by id', error);
+    throw error;
+  }
+
+  return data ?? null;
+}
+
+export async function fetchItemByIdWithPhotos(id) {
+  const item = await fetchItemById(id);
+  if (!item) return { item: null, photos: [] };
+  const photosByItem = await loadPhotosForItems([item.id]);
+  return { item, photos: photosByItem[item.id] ?? [] };
+}
+
 export async function searchItemsWithPhotos({
   query = '',
   type = 'all',

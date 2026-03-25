@@ -1,8 +1,7 @@
 <template>
   <router-link :to="`/items/${item.id}`" class="item-card">
     <div class="item-card-image">
-      <img v-if="firstPhoto" :src="firstPhoto" :alt="item.title" />
-      <div v-else class="item-card-placeholder">No photo</div>
+      <img :src="firstPhoto" :alt="item.title" />
     </div>
     <div class="item-card-body">
       <div class="item-card-header">
@@ -19,13 +18,14 @@
 
 <script setup>
 import { computed } from 'vue';
+import PLACEHOLDER from '../No_Image_Available.jpg';
 
 const props = defineProps({
   item: { type: Object, required: true },
   photos: { type: Array, default: () => [] },
 });
 
-const firstPhoto = computed(() => props.photos?.[0]?.photo_url || null);
+const firstPhoto = computed(() => props.photos?.[0]?.photo_url || PLACEHOLDER);
 
 const formattedTime = computed(() => {
   const t = props.item?.time;
