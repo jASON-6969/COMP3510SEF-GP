@@ -231,6 +231,38 @@ body {
   gap: 1rem;
 }
 
+.items-dual-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .items-dual-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.items-block-heading {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+  color: #333;
+  border-bottom: 2px solid var(--hkmugreen);
+  padding-bottom: 0.35rem;
+}
+
+.items-block-found .items-block-heading {
+  border-bottom-color: #0d6efd;
+}
+
+.items-block-empty {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+  padding: 0.5rem 0 0.25rem;
+}
+
 .item-card {
   display: block;
   background: #fff;

@@ -22,16 +22,31 @@
 
     <div class="items-list-content">
       <div v-if="loading" class="loading">Loading items...</div>
-      <div v-else-if="items.length === 0" class="empty">
-        No items match your search yet.
-      </div>
-      <div v-else class="item-grid">
-        <ItemCard
-          v-for="item in items"
-          :key="item.id"
-          :item="item"
-          :photos="itemPhotos[item.id] || []"
-        />
+      <div v-else class="items-dual-layout">
+        <section class="items-block items-block-lost" aria-labelledby="search-lost-heading">
+          <h3 id="search-lost-heading" class="items-block-heading">Lost</h3>
+          <p v-if="lostItems.length === 0" class="items-block-empty">No matching lost items.</p>
+          <div v-else class="item-grid">
+            <ItemCard
+              v-for="item in lostItems"
+              :key="item.id"
+              :item="item"
+              :photos="itemPhotos[item.id] || []"
+            />
+          </div>
+        </section>
+        <section class="items-block items-block-found" aria-labelledby="search-found-heading">
+          <h3 id="search-found-heading" class="items-block-heading">Found</h3>
+          <p v-if="foundItems.length === 0" class="items-block-empty">No matching found items.</p>
+          <div v-else class="item-grid">
+            <ItemCard
+              v-for="item in foundItems"
+              :key="item.id"
+              :item="item"
+              :photos="itemPhotos[item.id] || []"
+            />
+          </div>
+        </section>
       </div>
     </div>
   </section>
@@ -53,6 +68,9 @@ const items = ref([]);
 const photosByItem = ref({});
 
 const itemPhotos = computed(() => photosByItem.value);
+
+const lostItems = computed(() => items.value.filter((i) => i.type === 'lost'));
+const foundItems = computed(() => items.value.filter((i) => i.type === 'found'));
 
 const performSearch = async () => {
   loading.value = true;
