@@ -1,0 +1,11 @@
+node_modules/
+dist/
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+# Keep local Supabase client untracked (contains local wiring)
+src/lib/supabaseClient.js
+
