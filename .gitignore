@@ -6,6 +6,3 @@ dist/
 .env.*
 !.env.example
 
-# Keep local Supabase client untracked (contains local wiring)
-src/lib/supabaseClient.js
-
