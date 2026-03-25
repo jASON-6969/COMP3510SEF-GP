@@ -35,11 +35,26 @@ export async function fetchLatestFoundItems(limit = 5) {
   return data ?? [];
 }
 
-export async function searchItems({ query = '', type = 'all', limit = 50 } = {}) {
+const parseToIso = (value) => {
+  if (!value) return null;
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return null;
+  return d.toISOString();
+};
+
+export async function searchItems({ query = '', type = 'all', category = '', location = '', timeFrom = '', timeTo = '', limit = 50 } = {}) {
   let builder = supabase.from(ITEMS_TABLE).select('*').order('created_at', { ascending: false }).limit(limit);
 
   if (type === 'lost' || type === 'found') {
     builder = builder.eq('type', type);
+  }
+
+  if (category && category.trim()) {
+    builder = builder.ilike('category', `%${category.trim()}%`);
+  }
+
+  if (location && location.trim()) {
+    builder = builder.ilike('location', `%${location.trim()}%`);
   }
 
   if (query && query.trim()) {
@@ -48,6 +63,12 @@ export async function searchItems({ query = '', type = 'all', limit = 50 } = {})
       `title.ilike.${q},description.ilike.${q},category.ilike.${q},location.ilike.${q}`
     );
   }
+
+  const isoFrom = parseToIso(timeFrom);
+  if (isoFrom) builder = builder.gte('time', isoFrom);
+
+  const isoTo = parseToIso(timeTo);
+  if (isoTo) builder = builder.lte('time', isoTo);
 
   const { data, error } = await builder;
   if (error) {
@@ -79,8 +100,16 @@ export async function loadPhotosForItems(itemIds) {
   return byItem;
 }
 
-export async function searchItemsWithPhotos({ query = '', type = 'all', limit = 50 } = {}) {
-  const items = await searchItems({ query, type, limit });
+export async function searchItemsWithPhotos({
+  query = '',
+  type = 'all',
+  category = '',
+  location = '',
+  timeFrom = '',
+  timeTo = '',
+  limit = 50
+} = {}) {
+  const items = await searchItems({ query, type, category, location, timeFrom, timeTo, limit });
   const ids = items.map((i) => i.id);
   const photosByItem = await loadPhotosForItems(ids);
   return { items, photosByItem };
