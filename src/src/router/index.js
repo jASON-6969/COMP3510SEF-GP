@@ -6,7 +6,6 @@ import ReportLostView from '../views/ReportLostView.vue';
 import ReportFoundView from '../views/ReportFoundView.vue';
 import ItemsListView from '../views/ItemsListView.vue';
 import ItemDetailView from '../views/ItemDetailView.vue';
-import MyClaimsView from '../views/MyClaimsView.vue';
 
 const routes = [
   {
@@ -40,11 +39,6 @@ const routes = [
     component: ItemDetailView,
     props: true,
   },
-  {
-    path: '/my-claims',
-    name: 'my-claims',
-    component: MyClaimsView,
-  },
 ];
 
 const router = createRouter({
@@ -54,7 +48,7 @@ const router = createRouter({
 
 router.beforeEach((to, _from, next) => {
   const auth = useAuthStore();
-  const requiresAuth = to.name === 'report-lost' || to.name === 'report-found' || to.name === 'my-claims';
+  const requiresAuth = to.name === 'report-lost' || to.name === 'report-found';
   if (requiresAuth && !auth.isLoggedIn) {
     next({ name: 'login', query: { redirect: to.fullPath } });
   } else {

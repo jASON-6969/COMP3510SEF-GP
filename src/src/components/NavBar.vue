@@ -5,7 +5,6 @@
     <router-link to="/report-found">I Found Something</router-link>
     <router-link to="/items">Search Items</router-link>
     <template v-if="auth.isLoggedIn">
-      <router-link to="/my-claims">My Claims</router-link>
       <span class="nav-user">{{ auth.currentUser?.name }}</span>
       <button type="button" class="nav-btn" @click="handleLogout">Logout</button>
     </template>

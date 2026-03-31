@@ -45,7 +45,9 @@
       </div>
 
       <div class="item-detail-actions">
-        <button type="button" class="btn btn-primary" @click="onClaimOrContact">Claim / Contact</button>
+        <button type="button" class="btn btn-primary" :disabled="submittingClaim" @click="onClaimOrContact">
+          {{ submittingClaim ? 'Submitting claim...' : 'Claim / Contact' }}
+        </button>
         <p v-if="actionHint" class="muted">{{ actionHint }}</p>
       </div>
     </div>
@@ -57,6 +59,7 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
 import { fetchItemByIdWithPhotos } from '../lib/itemsApi';
+import { createClaimIfNotExists, getClaimantContact, getClaimantName, getClaimantUserId } from '../lib/claimsApi';
 import PLACEHOLDER from '../No_Image_Available.jpg';
 
 const props = defineProps({
@@ -76,6 +79,7 @@ const item = ref(null);
 const photos = ref([]);
 const actionHint = ref('');
 const photoMaxHeight = ref(420);
+const submittingClaim = ref(false);
 
 const displayPhotos = computed(() => {
   if (photos.value?.length) return photos.value;
@@ -149,7 +153,46 @@ function onClaimOrContact() {
     router.push({ name: 'login', query: { redirect: route.fullPath } });
     return;
   }
-  actionHint.value = 'Claim / private message flow is coming next (not implemented yet).';
+
+  if (!item.value?.id) {
+    actionHint.value = 'Item data is not ready. Please try again.';
+    return;
+  }
+
+  if (item.value.status !== 'pending') {
+    actionHint.value = 'This item is not open for claim now.';
+    return;
+  }
+
+  submitClaim();
+}
+
+async function submitClaim() {
+  if (submittingClaim.value) return;
+
+  submittingClaim.value = true;
+  actionHint.value = '';
+
+  try {
+    const user = auth.currentUser;
+    const payload = {
+      item_id: item.value.id,
+      claimant_user_id: getClaimantUserId(user),
+      claimant_name: getClaimantName(user),
+      claimant_contact: getClaimantContact(user),
+      status: 'pending',
+    };
+
+    const { alreadyClaimed } = await createClaimIfNotExists(payload);
+    actionHint.value = alreadyClaimed
+      ? 'You have already submitted a claim for this item.'
+      : 'Claim submitted successfully. The owner/finder will review it.';
+  } catch (e) {
+    console.error('Error creating claim', e);
+    actionHint.value = 'Failed to submit claim. Please try again.';
+  } finally {
+    submittingClaim.value = false;
+  }
 }
 
 watch(currentId, () => {
@@ -205,6 +248,10 @@ onUnmounted(() => {
 }
 .item-detail-actions {
   margin-top: 16px;
+}
+.btn[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 .muted {
   opacity: 0.8;
