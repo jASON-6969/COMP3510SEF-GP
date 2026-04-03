@@ -62,7 +62,10 @@
       </div>
 
       <p v-if="error" class="form-error">{{ error }}</p>
-      <p v-if="success" class="form-success">{{ success }}</p>
+      <div v-if="success" class="form-success-alert">
+        <p class="form-success">{{ success }}</p>
+        <button type="button" class="btn-outline" @click="goHome">Back to Home</button>
+      </div>
 
       <button type="submit" class="btn-primary" :disabled="submitting">
         {{ submitting ? 'Submitting...' : 'Submit Found Report' }}
@@ -73,10 +76,12 @@
 
 <script setup>
 import { reactive, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
 import { supabase } from '../lib/supabaseClient';
 
 const auth = useAuthStore();
+const router = useRouter();
 
 const form = reactive({
   title: '',
@@ -117,6 +122,10 @@ const ensureTime = () => {
     return new Date().toISOString();
   }
   return d.toISOString();
+};
+
+const goHome = () => {
+  router.push('/');
 };
 
 async function handleSubmit() {

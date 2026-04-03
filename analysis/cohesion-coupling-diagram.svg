@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" width="900" height="640" role="img" aria-labelledby="title desc">
+  <title id="title">Cohesion and Coupling Diagram</title>
+  <desc id="desc">UI modules with functional cohesion connect to the integration layer through data coupling.</desc>
+  <defs>
+    <style type="text/css"><![CDATA[
+      .title { font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 18px; font-weight: 700; fill: #0f172a; }
+      .subtitle { font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 11px; font-weight: 600; fill: #334155; }
+      .hub-text { font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 12px; font-weight: 700; fill: #0c4a6e; }
+      .hub-sub { font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 10px; fill: #0369a1; }
+      .mod-title { font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 11px; font-weight: 700; fill: #0f172a; }
+      .cohesion { font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 8.5px; fill: #475569; }
+      .edge { font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 8px; font-weight: 600; fill: #1e293b; }
+      .cap { fill: url(#capGrad); stroke: #7dd3fc; stroke-width: 1; }
+      .box { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1; }
+      .hub { fill: #e0f2fe; stroke: #38bdf8; stroke-width: 1.5; }
+      .edge-line { stroke: #0f172a; stroke-width: 1.25; fill: none; }
+      .tag { fill: #f8fafc; stroke: #e2e8f0; }
+    ]]></style>
+    <linearGradient id="capGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#bae6fd"/>
+      <stop offset="100%" stop-color="#e0f2fe"/>
+    </linearGradient>
+  </defs>
+
+  <text x="450" y="34" text-anchor="middle" class="title">Cohesion &amp; Coupling Diagram</text>
+  <text x="450" y="52" text-anchor="middle" class="subtitle">Functional cohesion in UI modules, data coupling via the integration layer</text>
+
+  <!-- Connectors behind hub and modules -->
+  <path class="edge-line" d="M 450 176 L 450 278"/>
+  <path class="edge-line" d="M 710 200 L 508 286"/>
+  <path class="edge-line" d="M 724 375 L 548 316"/>
+  <path class="edge-line" d="M 710 430 L 508 346"/>
+  <path class="edge-line" d="M 450 434 L 450 354"/>
+  <path class="edge-line" d="M 190 430 L 392 346"/>
+  <path class="edge-line" d="M 176 375 L 352 316"/>
+
+  <rect x="352" y="278" width="196" height="76" rx="11" class="hub"/>
+  <text x="450" y="305" text-anchor="middle" class="hub-text">Integration layer</text>
+  <text x="450" y="322" text-anchor="middle" class="hub-sub">itemsApi, claimsApi, Supabase client</text>
+  <text x="450" y="338" text-anchor="middle" class="hub-sub">(shared data access hub)</text>
+
+  <!-- Auth (top) -->
+  <rect x="396" y="74" width="108" height="34" rx="6" class="tag"/>
+  <text x="450" y="95" text-anchor="middle" class="edge">Data coupling</text>
+  <path class="cap" d="M 396 114 A 54 26 0 0 1 504 114 L 504 126 L 396 126 Z"/>
+  <rect x="396" y="126" width="108" height="50" class="box"/>
+  <text x="450" y="146" text-anchor="middle" class="mod-title">Auth</text>
+  <text x="450" y="164" text-anchor="middle" class="cohesion">Functional cohesion</text>
+
+  <!-- Report Lost (top right) -->
+  <rect x="656" y="98" width="108" height="34" rx="6" class="tag"/>
+  <text x="710" y="119" text-anchor="middle" class="edge">Data coupling</text>
+  <path class="cap" d="M 656 138 A 54 26 0 0 1 764 138 L 764 150 L 656 150 Z"/>
+  <rect x="656" y="150" width="108" height="50" class="box"/>
+  <text x="710" y="170" text-anchor="middle" class="mod-title">Report Lost</text>
+  <text x="710" y="188" text-anchor="middle" class="cohesion">Functional cohesion</text>
+
+  <!-- Report Found (right) -->
+  <rect x="724" y="298" width="108" height="34" rx="6" class="tag"/>
+  <text x="778" y="319" text-anchor="middle" class="edge">Data coupling</text>
+  <path class="cap" d="M 724 338 A 54 26 0 0 1 832 338 L 832 350 L 724 350 Z"/>
+  <rect x="724" y="350" width="108" height="50" class="box"/>
+  <text x="778" y="370" text-anchor="middle" class="mod-title">Report Found</text>
+  <text x="778" y="388" text-anchor="middle" class="cohesion">Functional cohesion</text>
+
+  <!-- My Claims (bottom right) -->
+  <rect x="656" y="498" width="108" height="34" rx="6" class="tag"/>
+  <text x="710" y="519" text-anchor="middle" class="edge">Data coupling</text>
+  <path class="cap" d="M 656 418 A 54 26 0 0 1 764 418 L 764 430 L 656 430 Z"/>
+  <rect x="656" y="430" width="108" height="50" class="box"/>
+  <text x="710" y="450" text-anchor="middle" class="mod-title">My Claims</text>
+  <text x="710" y="468" text-anchor="middle" class="cohesion">Functional cohesion</text>
+
+  <!-- Home (bottom) -->
+  <rect x="396" y="492" width="108" height="34" rx="6" class="tag"/>
+  <text x="450" y="513" text-anchor="middle" class="edge">Data coupling</text>
+  <path class="cap" d="M 396 422 A 54 26 0 0 1 504 422 L 504 434 L 396 434 Z"/>
+  <rect x="396" y="434" width="108" height="50" class="box"/>
+  <text x="450" y="454" text-anchor="middle" class="mod-title">Home / Stats</text>
+  <text x="450" y="472" text-anchor="middle" class="cohesion">Functional cohesion</text>
+
+  <!-- Search (bottom left) -->
+  <rect x="136" y="498" width="108" height="34" rx="6" class="tag"/>
+  <text x="190" y="519" text-anchor="middle" class="edge">Data coupling</text>
+  <path class="cap" d="M 136 418 A 54 26 0 0 1 244 418 L 244 430 L 136 430 Z"/>
+  <rect x="136" y="430" width="108" height="50" class="box"/>
+  <text x="190" y="448" text-anchor="middle" class="mod-title">Search &amp; Filter</text>
+  <text x="190" y="466" text-anchor="middle" class="cohesion">Functional cohesion</text>
+
+  <!-- Item Detail (left) -->
+  <rect x="68" y="298" width="108" height="34" rx="6" class="tag"/>
+  <text x="122" y="319" text-anchor="middle" class="edge">Data coupling</text>
+  <path class="cap" d="M 68 338 A 54 26 0 0 1 176 338 L 176 350 L 68 350 Z"/>
+  <rect x="68" y="350" width="108" height="50" class="box"/>
+  <text x="122" y="368" text-anchor="middle" class="mod-title">Item Detail &amp; Claim</text>
+  <text x="122" y="386" text-anchor="middle" class="cohesion">Functional cohesion</text>
+</svg>

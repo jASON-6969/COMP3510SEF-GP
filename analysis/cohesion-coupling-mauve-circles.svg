@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="800" height="560" role="img" aria-labelledby="ttl dsc">
+  <title id="ttl">Cohesion and Coupling Diagram</title>
+  <desc id="dsc">Functional cohesion in circular modules; data coupling arrows to the integration hub.</desc>
+  <defs>
+    <filter id="soft" x="-8%" y="-8%" width="116%" height="116%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.2" flood-color="#2d4a6d" flood-opacity="0.22"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1a1a1a"/>
+    </marker>
+    <style type="text/css"><![CDATA[
+      .diagram-title { font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 17px; font-weight: 700; fill: #2d1f2d; }
+      .diagram-sub { font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 10.5px; font-weight: 600; fill: #3d5a73; }
+      .hub-name { font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 13px; font-weight: 700; fill: #0f2744; }
+      .hub-detail { font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 8.8px; font-weight: 600; fill: #2d4f73; }
+      .mod-name { font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 12px; font-weight: 700; fill: #0f2744; }
+      .mod-cohesion { font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 8.2px; font-weight: 600; fill: #2d4f73; }
+      .edge-cap { font-family: system-ui, "Segoe UI", Arial, sans-serif; font-size: 8px; font-weight: 700; fill: #0f2744; }
+      .edge-bg { fill: #f4f9ff; stroke: #5c7eb3; stroke-width: 0.75; }
+    ]]></style>
+  </defs>
+
+  <text x="400" y="36" text-anchor="middle" class="diagram-title">Cohesion &amp; Coupling Diagram</text>
+  <text x="400" y="54" text-anchor="middle" class="diagram-sub">Functional cohesion + data coupling (Vue + Supabase)</text>
+
+  <!-- Edges: Report Lost, Auth, Dashboard, Search -> Integration -->
+  <path d="M 194 148 L 343 243" stroke="#1a1a1a" stroke-width="1.35" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 172 280 L 332 280" stroke="#1a1a1a" stroke-width="1.35" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 194 412 L 344 317" stroke="#1a1a1a" stroke-width="1.35" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 606 412 L 456 317" stroke="#1a1a1a" stroke-width="1.35" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Edge labels -->
+  <rect x="240" y="178" width="88" height="18" rx="4" class="edge-bg"/>
+  <text x="284" y="190" text-anchor="middle" class="edge-cap">Data coupling</text>
+
+  <rect x="210" y="262" width="88" height="18" rx="4" class="edge-bg"/>
+  <text x="254" y="274" text-anchor="middle" class="edge-cap">Data coupling</text>
+
+  <rect x="240" y="352" width="88" height="18" rx="4" class="edge-bg"/>
+  <text x="284" y="364" text-anchor="middle" class="edge-cap">Data coupling</text>
+
+  <rect x="472" y="352" width="88" height="18" rx="4" class="edge-bg"/>
+  <text x="516" y="364" text-anchor="middle" class="edge-cap">Data coupling</text>
+
+  <!-- Peripheral nodes (solid #CCE1FF) -->
+  <g filter="url(#soft)">
+    <!-- Report Lost -->
+    <circle cx="150" cy="120" r="52" fill="#CCE1FF" stroke="#5c7eb3" stroke-width="1.5"/>
+    <text x="150" y="112" text-anchor="middle" class="mod-name">Report Lost</text>
+    <text x="150" y="128" text-anchor="middle" class="mod-cohesion">Functional cohesion</text>
+
+    <!-- Auth -->
+    <circle cx="120" cy="280" r="52" fill="#CCE1FF" stroke="#5c7eb3" stroke-width="1.5"/>
+    <text x="120" y="272" text-anchor="middle" class="mod-name">Auth</text>
+    <text x="120" y="288" text-anchor="middle" class="mod-cohesion">Functional cohesion</text>
+
+    <!-- Dashboard (Home / stats in this codebase) -->
+    <circle cx="150" cy="440" r="52" fill="#CCE1FF" stroke="#5c7eb3" stroke-width="1.5"/>
+    <text x="150" y="432" text-anchor="middle" class="mod-name">Dashboard</text>
+    <text x="150" y="448" text-anchor="middle" class="mod-cohesion">Functional cohesion</text>
+
+    <!-- Search -->
+    <circle cx="650" cy="440" r="52" fill="#CCE1FF" stroke="#5c7eb3" stroke-width="1.5"/>
+    <text x="650" y="432" text-anchor="middle" class="mod-name">Search</text>
+    <text x="650" y="448" text-anchor="middle" class="mod-cohesion">Functional cohesion</text>
+
+    <!-- Integration hub -->
+    <circle cx="400" cy="280" r="68" fill="#CCE1FF" stroke="#3d5c8a" stroke-width="1.75"/>
+    <text x="400" y="268" text-anchor="middle" class="hub-name">Integration</text>
+    <text x="400" y="286" text-anchor="middle" class="hub-detail">itemsApi, claimsApi</text>
+    <text x="400" y="298" text-anchor="middle" class="hub-detail">Supabase client</text>
+  </g>
+</svg>

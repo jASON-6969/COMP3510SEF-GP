@@ -52,7 +52,10 @@
       </div>
 
       <p v-if="error" class="form-error">{{ error }}</p>
-      <p v-if="success" class="form-success">{{ success }}</p>
+      <div v-if="success" class="form-success-alert">
+        <p class="form-success">{{ success }}</p>
+        <button type="button" class="btn-outline" @click="goHome">Back to Home</button>
+      </div>
 
       <button type="submit" class="btn-primary" :disabled="submitting">
         {{ submitting ? 'Submitting...' : 'Submit Lost Report' }}
@@ -63,6 +66,13 @@
 
 <script setup>
 import { useItemReportForm } from '../composables/useItemReportForm';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const goHome = () => {
+  router.push('/');
+};
 
 const { form, submitting, error, success, onFileChange, handleSubmit } = useItemReportForm({
   itemType: 'lost',
